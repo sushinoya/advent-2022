@@ -7,5 +7,10 @@ edition = "2021"
 name = "day-01"
 path = "src/day-01.rs"
 
+[[bin]]
+name = "day-02"
+path = "src/day-02.rs"
+
 [dependencies]
+lazy_static = "1.4.0"
 log = "0.4.17"
