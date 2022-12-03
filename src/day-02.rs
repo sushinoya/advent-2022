@@ -10,7 +10,6 @@ use std::convert::identity;
 use std::io::BufRead;
 use std::iter::Iterator;
 
-
 #[derive(Eq, PartialEq, Debug, Clone, Copy)]
 enum Move {
     Rock,
@@ -87,13 +86,11 @@ type Outcome = String;
 
 fn move_to_play(their_move: Move, wanted_outcome: Outcome) -> Move {
     for possible_move in [Move::Rock, Move::Paper, Move::Scissors] {
-        if wanted_outcome == "X" && possible_move < their_move {
-            return possible_move;
-        }
-        if wanted_outcome == "Y" && possible_move == their_move {
-            return possible_move;
-        }
-        if wanted_outcome == "Z" && possible_move > their_move {
+        let move_matches_wanted_outcome = (wanted_outcome == "X" && possible_move < their_move)
+            || (wanted_outcome == "Y" && possible_move == their_move)
+            || (wanted_outcome == "Z" && possible_move > their_move);
+
+        if move_matches_wanted_outcome {
             return possible_move;
         }
     }
