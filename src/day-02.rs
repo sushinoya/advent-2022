@@ -94,7 +94,7 @@ fn move_to_play(their_move: Move, wanted_outcome: Outcome) -> Move {
             return possible_move;
         }
     }
-    panic!() // One of the possible move is guaranteed to be returned
+    unreachable!() // One of the possible move is guaranteed to be returned
 }
 
 #[allow(dead_code)]
