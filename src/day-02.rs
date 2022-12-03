@@ -98,25 +98,25 @@ fn move_to_play(their_move: Move, wanted_outcome: Outcome) -> Move {
 }
 
 #[allow(dead_code)]
-fn part_one() -> Result<(), std::io::Error> {
+fn part_one() -> i32 {
     let players_moves = parse_input(|round_moves: (&str, &str)| {
         (CHAR_TO_MOVE[&round_moves.0], CHAR_TO_MOVE[&round_moves.1])
     });
-    println!("{}", score_for_moves(players_moves));
-    Ok(())
+    score_for_moves(players_moves)
 }
 
-fn part_two() -> Result<(), std::io::Error> {
+fn part_two() -> i32 {
     let player_moves = parse_input(|round_moves: (&str, &str)| {
         (
             CHAR_TO_MOVE[&round_moves.0],
             move_to_play(CHAR_TO_MOVE[&round_moves.0], Outcome::from(round_moves.1)),
         )
     });
-    println!("{}", score_for_moves(player_moves));
-    Ok(())
+    score_for_moves(player_moves)
 }
 
 fn main() -> Result<(), std::io::Error> {
-    part_two()
+    println!("{}", part_one());
+    println!("{}", part_two());
+    Ok(())
 }

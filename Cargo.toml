@@ -11,6 +11,11 @@ path = "src/day-01.rs"
 name = "day-02"
 path = "src/day-02.rs"
 
+[[bin]]
+name = "day-03"
+path = "src/day-03.rs"
+
 [dependencies]
+itertools = "0.10.5"
 lazy_static = "1.4.0"
 log = "0.4.17"
