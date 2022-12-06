@@ -72,8 +72,7 @@ fn parse_input<T: 'static>(
     parser: fn((&str, &str)) -> (Move, T),
 ) -> Box<dyn Iterator<Item = (Move, T)>> {
     let rounds = input_for_day(2)
-        .lines()
-        .map(move |line| line.unwrap().split_once(" ").map(parser))
+        .map(move |line| line.split_once(" ").map(parser))
         .filter_map(identity);
     Box::new(rounds)
 }

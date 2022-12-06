@@ -3,7 +3,6 @@
 mod utils;
 
 use crate::utils::input_for_day;
-use std::io::BufRead;
 
 struct Range {
     start: i32,
@@ -42,8 +41,8 @@ fn is_overlapping_range(range: &Range, other_range: &Range) -> bool {
 }
 
 fn count_filtered_ranges(filter_fn: fn(&Range, &Range) -> bool) -> usize {
-    let lines = input_for_day(4).lines();
-    let range_pairs = lines.map(|line| parse_line(&line.unwrap()));
+    let lines = input_for_day(4);
+    let range_pairs = lines.map(|line| parse_line(&line));
     let subset_pairs = range_pairs.filter(|(a, b)| filter_fn(a, b));
     subset_pairs.count()
 }

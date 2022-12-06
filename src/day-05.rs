@@ -8,7 +8,6 @@ use std::iter::Iterator;
 use crate::utils::input_for_day;
 use std::char;
 use std::collections::HashMap;
-use std::io::BufRead;
 
 struct Move {
     count: i8,
@@ -32,10 +31,7 @@ impl Move {
 }
 
 fn parse_moves() -> impl Iterator<Item = Move> {
-    let lines = input_for_day(5)
-        .lines()
-        .map(|line| line.unwrap())
-        .filter(|line| line.starts_with("move"));
+    let lines = input_for_day(5).filter(|line| line.starts_with("move"));
     lines.map(|line| Move::from_str(&line))
 }
 
@@ -51,11 +47,10 @@ fn parse_stack_items(line: &str) -> Vec<char> {
 
 fn parse_stacks() -> HashMap<i8, Vec<char>> {
     let stacks: &mut HashMap<i8, Vec<char>> = &mut HashMap::new();
-    let lines = input_for_day(5).lines().map(|line| line.unwrap());
 
-    for line in lines {
-        // Reached the end of the stack definition; break
+    for line in input_for_day(5) {
         if line.is_empty() {
+            // Reached the end of the stack definition; break
             break;
         }
 

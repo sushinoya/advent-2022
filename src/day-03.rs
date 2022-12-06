@@ -5,8 +5,6 @@ mod utils;
 use crate::utils::input_for_day;
 use itertools::{Chunk, Itertools};
 use std::collections::HashSet;
-use std::fs::File;
-use std::io::{BufRead, BufReader, Lines};
 
 fn chars_in_both_parts(line: &str) -> impl Iterator<Item = char> + '_ {
     let (first, second) = line.split_at(line.len() / 2);
@@ -27,17 +25,17 @@ fn priority(chr: char) -> u32 {
 }
 
 fn part_one() -> u32 {
-    let lines = input_for_day(3).lines();
+    let lines = input_for_day(3);
     let common_chars_in_lines =
-        lines.map(|line| chars_in_both_parts(&line.unwrap()).collect::<Vec<_>>());
+        lines.map(|line| chars_in_both_parts(&line).collect::<Vec<_>>());
     let sum_of_priorities: u32 = common_chars_in_lines
         .map(|chars| chars.into_iter().map(priority).sum::<u32>())
         .sum();
     sum_of_priorities
 }
 
-fn common_char_in_group(group: Chunk<Lines<BufReader<File>>>) -> char {
-    let mut sets_of_chars = group.map(|line| HashSet::from_iter(line.unwrap().chars()));
+fn common_char_in_group(group: Chunk<impl Iterator<Item = String>>) -> char {
+    let mut sets_of_chars = group.map(|line| HashSet::from_iter(line.chars()));
     let first_set: HashSet<char> = sets_of_chars.next().unwrap();
     let common_chars = sets_of_chars.fold(first_set, |acc, other_set| {
         acc.intersection(&other_set).cloned().collect()
@@ -48,7 +46,7 @@ fn common_char_in_group(group: Chunk<Lines<BufReader<File>>>) -> char {
 }
 
 fn part_two() -> u32 {
-    let binding = input_for_day(3).lines().chunks(3);
+    let binding = input_for_day(3).chunks(3);
     let groups = binding.into_iter();
     let group_badges = groups.map(|group| common_char_in_group(group));
     group_badges.map(priority).sum()

@@ -3,7 +3,6 @@
 mod utils;
 use std::cmp::Reverse;
 use std::collections::BinaryHeap;
-use std::io::prelude::*;
 use std::iter::Iterator;
 
 type BinaryMinHeap<T> = BinaryHeap<Reverse<T>>;
@@ -19,9 +18,7 @@ fn main() -> Result<(), std::io::Error> {
     let mut heap: BinaryMinHeap<i64> = BinaryHeap::with_capacity(3);
     let mut curr_calories_sum: i64 = 0;
 
-    for line in utils::input_for_day(1).lines() {
-        let calories: String = line.unwrap();
-
+    for calories in utils::input_for_day(1) {
         if !calories.is_empty() {
             curr_calories_sum += calories.parse::<i64>().unwrap();
             continue;
