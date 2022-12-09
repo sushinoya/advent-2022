@@ -7,7 +7,6 @@ use lazy_static::lazy_static;
 use std::cmp::Ordering;
 use std::collections::HashMap;
 use std::convert::identity;
-use std::io::BufRead;
 use std::iter::Iterator;
 
 #[derive(Eq, PartialEq, Debug, Clone, Copy)]
